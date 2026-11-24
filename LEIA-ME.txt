@@ -1,0 +1,30 @@
+========================================================================
+ANTERO® CONSULTORIA — PACOTE DO SITE + INTEGRAÇÃO GOOGLE SHEETS
+========================================================================
+
+Arquivos incluídos neste pacote:
+1. index.html            -> Estrutura completa do site + painel CRM local
+2. style.css             -> Estilos customizados, animações e responsividade
+3. script.js             -> Lógica do formulário, máscara WhatsApp, CRM e envio ao Google Sheets
+4. google-apps-script.gs -> Código pronto para colar no Google Apps Script da planilha
+
+PASSO A PASSO PARA PUBLICAR E CONECTAR:
+
+1. LOGO OFICIAL:
+   Coloque o arquivo da sua logo na mesma pasta com o nome exato:
+   Logo - Antero Consultoria de Aceleração e Internacionalização de Marcas.jfif
+   (Ou carregue diretamente pelo botão "Carregar Logo Oficial" dentro da Aba Agendamentos).
+
+2. CONECTAR AO GOOGLE SHEETS (2 MINUTOS):
+   a) Abra a planilha "Agendamentos - Antero Consultoria" no seu Google Drive.
+   b) No menu superior, clique em: Extensões > Apps Script.
+   c) Apague o código inicial, copie todo o conteúdo de `google-apps-script.gs` e cole lá.
+   d) Salve o projeto e clique em: Implantar > Nova implantação.
+   e) Selecione o tipo "App da Web":
+      - Executar como: Eu
+      - Quem pode acessar: Qualquer pessoa
+   f) Autorize as permissões quando solicitado e copie a URL do App da Web gerada.
+   g) Abra o arquivo `script.js`, localize a linha `webhookUrl: '',` (no topo) e cole a URL entre as aspas.
+
+3. PUBLICAR O SITE:
+   Você pode testar abrindo `index.html` no navegador ou publicar gratuitamente arrastando a pasta no Netlify Drop, Vercel ou GitHub Pages.
