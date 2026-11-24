@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Essencial -->
+  <title>Antero® | Consultoria de Aceleração e Internacionalização de Marcas</title>
+  <meta
+    name="description"
+    content="Agende sua 1ª consultoria gratuita com a Antero Consultoria. Registro de marcas no INPI, aceleração comercial, provas digitais e internacionalização Brasil–Mercosul."
+  />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph (Compartilhamento em Redes Sociais / WhatsApp) -->
+  <meta property="og:title" content="Antero® | Consultoria de Aceleração e Internacionalização de Marcas" />
+  <meta
+    property="og:description"
+    content="Proteja sua marca no INPI e estruture sua expansão internacional com segurança. Agende sua 1ª consultoria gratuita."
+  />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts: Plus Jakarta Sans + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Configuração da Paleta Institucional Antero® -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            antero: {
+              teal: '#0D8CA3',
+              tealDark: '#096E81',
+              tealSoft: '#E6F5F8',
+              dark: '#0A0F14',
+              darkCard: '#121A22',
+              surface: '#F8FAFC',
+              muted: '#64748B',
+            },
+          },
+          boxShadow: {
+            soft: '0 12px 36px -12px rgba(10, 15, 20, 0.08)',
+            teal: '0 10px 25px -5px rgba(13, 140, 163, 0.35)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Lucide Icons via CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- CSS Customizado -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg-antero-surface text-antero-dark font-sans antialiased selection:bg-antero-teal/20 selection:text-antero-dark">
+
+  <!-- 1. HEADER / NAVEGAÇÃO FIXA + ABA CRM -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-4">
+
+        <!-- Logo Oficial Antero® -->
+        <a
+          href="#"
+          onclick="switchView('site')"
+          class="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-antero-teal rounded-lg shrink-0"
+          aria-label="Antero Consultoria - Início"
+        >
+          <img
+            id="brand-logo-header"
+            src="Logo - Antero Consultoria de Aceleração e Internacionalização de Marcas.jfif"
+            alt="Antero - Consultoria de Aceleração e Internacionalização de Marcas"
+            class="h-12 sm:h-14 w-auto object-contain"
+            onerror="handleLogoError(this, 'logo-fallback-header')"
+          />
+          <div id="logo-fallback-header" class="hidden flex items-center gap-2.5">
+            <div class="w-10 h-10 rounded-lg bg-antero-dark flex items-center justify-center">
+              <span class="font-display font-extrabold text-xl text-antero-teal">A</span>
+            </div>
+            <div class="leading-tight">
+              <span class="font-display font-extrabold text-lg text-antero-dark block">Antero®</span>
+              <span class="text-[9px] font-semibold uppercase tracking-wider text-antero-muted block">
+                Aceleração &amp; Internacionalização
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Navegação Principal -->
+        <nav class="hidden lg:flex items-center gap-7" aria-label="Navegação Principal">
+          <a href="#solucoes" onclick="switchView('site')" class="text-sm font-medium text-slate-600 hover:text-antero-teal transition-colors">Soluções</a>
+          <a href="#metodo" onclick="switchView('site')" class="text-sm font-medium text-slate-600 hover:text-antero-teal transition-colors">Como Funciona</a>
+          <a href="#resultados" onclick="switchView('site')" class="text-sm font-medium text-slate-600 hover:text-antero-teal transition-colors">Resultados</a>
+          <a href="#faq" onclick="switchView('site')" class="text-sm font-medium text-slate-600 hover:text-antero-teal transition-colors">Dúvidas</a>
+        </nav>
+
+        <!-- Ações do Header -->
+        <div class="hidden md:flex items-center gap-3">
+          <button
+            id="btn-toggle-crm"
+            type="button"
+            onclick="toggleView()"
+            class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs sm:text-sm font-semibold transition-all"
+            title="Alternar entre o Site e o Painel de Agendamentos"
+          >
+            <i data-lucide="layout-dashboard" class="w-4 h-4 text-antero-teal"></i>
+            <span id="crm-btn-label">Aba Agendamentos</span>
+            <span
+              id="header-badge-count"
+              class="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-antero-teal text-white text-[11px] font-bold"
+            >0</span>
+          </button>
+
+          <a
+            href="#agendar"
+            onclick="switchView('site')"
+            class="inline-flex items-center gap-2 bg-antero-teal hover:bg-antero-tealDark text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-all shadow-teal hover:-translate-y-0.5"
+          >
+            <span>1ª Consultoria Grátis</span>
+            <i data-lucide="calendar-check" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <!-- Botão Menu Mobile -->
+        <button
+          id="mobile-menu-btn"
+          type="button"
+          class="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-antero-teal"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          aria-label="Abrir menu"
+        >
+          <i data-lucide="menu" id="menu-icon-open" class="w-6 h-6"></i>
+          <i data-lucide="x" id="menu-icon-close" class="w-6 h-6 hidden"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menu Mobile -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200 px-4 pt-4 pb-6 space-y-2 shadow-lg">
+      <a href="#solucoes" onclick="switchView('site')" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Soluções</a>
+      <a href="#metodo" onclick="switchView('site')" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Como Funciona</a>
+      <a href="#resultados" onclick="switchView('site')" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Resultados</a>
+      <a href="#faq" onclick="switchView('site')" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Dúvidas</a>
+
+      <div class="pt-3 border-t border-slate-100 space-y-2.5">
+        <button
+          type="button"
+          onclick="toggleView(); closeMobileMenu();"
+          class="w-full inline-flex justify-center items-center gap-2 border border-slate-300 bg-slate-50 text-slate-800 font-semibold text-sm px-4 py-3 rounded-lg"
+        >
+          <i data-lucide="layout-dashboard" class="w-4 h-4 text-antero-teal"></i>
+          <span id="mobile-crm-label">Abrir Aba de Agendamentos (CRM)</span>
+        </button>
+        <a
+          href="#agendar"
+          onclick="switchView('site')"
+          class="mobile-link w-full inline-flex justify-center items-center gap-2 bg-antero-teal hover:bg-antero-tealDark text-white font-semibold text-base px-5 py-3 rounded-lg"
+        >
+          <span>Agendar 1ª Consultoria Grátis</span>
+          <i data-lucide="calendar-check" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- VISÃO 1: LANDING PAGE -->
+  <main id="view-site">
+
+    <!-- 2. HERO SECTION -->
+    <section class="relative bg-antero-dark pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div class="hero-glow-top"></div>
+        <div class="hero-glow-bottom"></div>
+      </div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-7">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-antero-teal/15 border border-antero-teal/30 text-cyan-300 text-xs font-semibold tracking-wide uppercase mb-6">
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+              Aceleração &amp; Internacionalização de Marcas
+            </div>
+
+            <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-[3.4rem] text-white leading-[1.1] tracking-tight mb-6">
+              Proteja sua marca hoje e <span class="text-antero-teal">escale sem fronteiras</span> com segurança.
+            </h1>
+
+            <p class="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-2xl mb-8">
+              Da blindagem patrimonial no INPI à expansão empresarial no Mercosul. Estruturamos sua marca, preservamos suas provas digitais e aceleramos seu posicionamento para o próximo nível.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a
+                href="#agendar"
+                class="inline-flex justify-center items-center gap-2.5 bg-antero-teal hover:bg-antero-tealDark text-white font-bold text-base px-7 py-4 rounded-xl transition-all shadow-teal hover:-translate-y-0.5"
+              >
+                <i data-lucide="calendar-plus" class="w-5 h-5"></i>
+                <span>Agendar 1ª Consultoria Grátis</span>
+              </a>
+              <a
+                href="https://wa.me/558592550496?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Antero%20Consultoria%20sobre%20prote%C3%A7%C3%A3o%20e%20acelera%C3%A7%C3%A3o%20de%20marcas."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex justify-center items-center gap-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-semibold text-base px-7 py-4 rounded-xl transition-all"
+              >
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                <span>Falar no WhatsApp</span>
+              </a>
+            </div>
+
+            <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-400">
+              <span class="inline-flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-antero-teal"></i>
+                1ª sessão estratégica 100% gratuita
+              </span>
+              <span class="inline-flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-antero-teal"></i>
+                Atendimento Brasil &amp; Paraguai (Mercosul)
+              </span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="relative rounded-2xl overflow-hidden border border-white/10 bg-antero-darkCard p-2 shadow-2xl">
+              <img
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&q=80"
+                alt="Reunião estratégica de aceleração e internacionalização de marcas"
+                class="w-full h-[360px] sm:h-[420px] object-cover rounded-xl opacity-90"
+              />
+              <div class="glass-card absolute bottom-5 left-5 right-5 rounded-xl p-4 sm:p-5 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-11 h-11 rounded-lg bg-antero-teal/20 border border-antero-teal/40 flex items-center justify-center shrink-0">
+                    <i data-lucide="globe-2" class="w-6 h-6 text-cyan-300"></i>
+                  </div>
+                  <div>
+                    <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Diagnóstico Exclusivo</p>
+                    <p class="text-sm sm:text-base font-bold text-white">Viabilidade INPI + Plano de Expansão</p>
+                  </div>
+                </div>
+                <span class="hidden sm:inline-flex px-2.5 py-1 rounded-md bg-antero-teal/25 text-cyan-300 text-xs font-bold">
+                  Grátis
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PROVA SOCIAL / AUTORIDADE -->
+    <section class="bg-white border-b border-slate-200/80 py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center lg:text-left divide-y lg:divide-y-0 lg:divide-x divide-slate-200/80">
+          <div class="pt-4 lg:pt-0 lg:pr-6">
+            <p class="font-display font-extrabold text-3xl sm:text-4xl text-antero-dark">10 Anos</p>
+            <p class="text-sm text-antero-muted mt-1">De exclusividade garantida após concessão no INPI</p>
+          </div>
+          <div class="pt-4 lg:pt-0 lg:px-6">
+            <p class="font-display font-extrabold text-3xl sm:text-4xl text-antero-teal">Brasil &amp; PY</p>
+            <p class="text-sm text-antero-muted mt-1">Ponte estratégica de negócios e internacionalização</p>
+          </div>
+          <div class="pt-4 lg:pt-0 lg:px-6">
+            <p class="font-display font-extrabold text-3xl sm:text-4xl text-antero-dark">100%</p>
+            <p class="text-sm text-antero-muted mt-1">Monitoramento semanal na Revista do INPI (RPI)</p>
+          </div>
+          <div class="pt-4 lg:pt-0 lg:pl-6">
+            <p class="font-display font-extrabold text-3xl sm:text-4xl text-antero-dark">Zero Risco</p>
+            <p class="text-sm text-antero-muted mt-1">Comece com uma consultoria inicial gratuita</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SOLUÇÕES (BENTO GRID) -->
+    <section id="solucoes" class="py-20 lg:py-28 bg-antero-surface">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-14 reveal">
+          <span class="text-antero-teal font-bold text-xs uppercase tracking-[0.2em]">Soluções de Alto Impacto</span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-antero-dark mt-2 tracking-tight">
+            Tudo o que sua marca precisa para se blindar, acelerar e cruzar fronteiras.
+          </h2>
+          <p class="text-slate-600 text-lg mt-4">
+            Combinamos visão jurídica prática, inteligência comercial e execução técnica para transformar sua marca em um ativo protegido e valorizado.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+          <div class="md:col-span-4 bg-antero-dark text-white rounded-2xl p-8 sm:p-10 shadow-soft flex flex-col justify-between relative overflow-hidden group reveal">
+            <div class="absolute top-0 right-0 w-72 h-72 bg-antero-teal/20 rounded-full blur-3xl -mr-20 -mt-20 transition-transform duration-500 group-hover:scale-110" aria-hidden="true"></div>
+            <div class="relative z-10">
+              <div class="w-12 h-12 rounded-xl bg-antero-teal/20 border border-antero-teal/40 flex items-center justify-center mb-6">
+                <i data-lucide="shield-check" class="w-6 h-6 text-cyan-300"></i>
+              </div>
+              <h3 class="font-display font-bold text-2xl sm:text-3xl mb-3">Registro e Blindagem de Marcas no INPI</h3>
+              <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-xl">
+                Não arrisque investir anos em marketing e perder o nome da sua empresa para terceiros. Realizamos busca de anterioridade minuciosa, protocolo estratégico por classe (NCL) e acompanhamento integral até o certificado.
+              </p>
+            </div>
+            <div class="relative z-10 mt-8 pt-6 border-t border-white/10 flex flex-wrap gap-3 text-xs font-medium text-slate-300">
+              <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">Busca de Colidência</span>
+              <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">Monitoramento RPI</span>
+              <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">Oposições &amp; Recursos</span>
+            </div>
+          </div>
+
+          <div class="md:col-span-2 bg-white rounded-2xl p-8 border border-slate-200/80 shadow-soft hover:border-antero-teal/50 transition-colors flex flex-col justify-between reveal">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-antero-tealSoft flex items-center justify-center mb-6">
+                <i data-lucide="plane-takeoff" class="w-6 h-6 text-antero-teal"></i>
+              </div>
+              <h3 class="font-display font-bold text-xl text-antero-dark mb-3">Internacionalização Brasil–Mercosul</h3>
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Apoio estratégico para empresas que buscam eficiência tributária, regime de Maquila no Paraguai, registro internacional de marcas e conexões comerciais B2B.
+              </p>
+            </div>
+            <a href="#agendar" class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-antero-teal hover:text-antero-tealDark transition-colors">
+              <span>Agendar diagnóstico</span>
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+
+          <div class="md:col-span-3 bg-white rounded-2xl p-8 border border-slate-200/80 shadow-soft hover:border-antero-teal/50 transition-colors reveal">
+            <div class="w-12 h-12 rounded-xl bg-antero-tealSoft flex items-center justify-center mb-6">
+              <i data-lucide="fingerprint" class="w-6 h-6 text-antero-teal"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-antero-dark mb-3">Preservação de Provas Digitais</h3>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Proteja-se contra concorrência desleal, cópia de marca ou fraudes online. Coletamos provas digitais de WhatsApp, redes sociais e sites com integridade forense e cadeia de custódia intacta.
+            </p>
+          </div>
+
+          <div class="md:col-span-3 bg-white rounded-2xl p-8 border border-slate-200/80 shadow-soft hover:border-antero-teal/50 transition-colors reveal">
+            <div class="w-12 h-12 rounded-xl bg-antero-tealSoft flex items-center justify-center mb-6">
+              <i data-lucide="trending-up" class="w-6 h-6 text-antero-teal"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-antero-dark mb-3">Aceleração &amp; Mediação Empresarial</h3>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Estruturação comercial B2B, mediação extrajudicial para resolução ágil de conflitos empresariais e correspondência jurídica com precisão de prazos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. COMO FUNCIONA -->
+    <section id="metodo" class="py-20 lg:py-28 bg-white border-y border-slate-200/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+          <span class="text-antero-teal font-bold text-xs uppercase tracking-[0.2em]">Processo Transparente</span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-antero-dark mt-2 tracking-tight">
+            Como funciona a sua jornada conosco
+          </h2>
+          <p class="text-slate-600 text-base sm:text-lg mt-4">
+            Quatro passos simples para sair da vulnerabilidade e assumir o controle total da sua marca.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="p-6 rounded-2xl bg-antero-surface border border-slate-200/70 reveal">
+            <span class="font-display font-extrabold text-5xl text-antero-teal/25 select-none">01</span>
+            <h3 class="font-display font-bold text-lg text-antero-dark mt-2 mb-2">1ª Consultoria Grátis</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Você escolhe o melhor dia e horário abaixo. Ouvimos seu momento atual e mapeamos riscos e oportunidades.
+            </p>
+          </div>
+          <div class="p-6 rounded-2xl bg-antero-surface border border-slate-200/70 reveal">
+            <span class="font-display font-extrabold text-5xl text-antero-teal/25 select-none">02</span>
+            <h3 class="font-display font-bold text-lg text-antero-dark mt-2 mb-2">Diagnóstico Técnico</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Realizamos a busca oficial no INPI ou o estudo de viabilidade de expansão para embasar sua decisão com dados.
+            </p>
+          </div>
+          <div class="p-6 rounded-2xl bg-antero-surface border border-slate-200/70 reveal">
+            <span class="font-display font-extrabold text-5xl text-antero-teal/25 select-none">03</span>
+            <h3 class="font-display font-bold text-lg text-antero-dark mt-2 mb-2">Execução &amp; Protocolo</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Estruturamos toda a documentação, protocolamos junto aos órgãos competentes e assumimos a gestão dos prazos.
+            </p>
+          </div>
+          <div class="p-6 rounded-2xl bg-antero-surface border border-slate-200/70 reveal">
+            <span class="font-display font-extrabold text-5xl text-antero-teal/25 select-none">04</span>
+            <h3 class="font-display font-bold text-lg text-antero-dark mt-2 mb-2">Acompanhamento Ativo</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Você recebe atualizações claras em cada marco importante até a conquista definitiva da proteção e escala.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. AGENDAMENTO -->
+    <section id="agendar" class="py-20 lg:py-28 bg-antero-dark relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div class="absolute top-0 right-0 w-[450px] h-[450px] rounded-full bg-antero-teal/15 blur-3xl"></div>
+      </div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
+          <div class="lg:col-span-5 text-white reveal">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-antero-teal/20 border border-antero-teal/40 text-cyan-300 text-xs font-bold uppercase tracking-wider mb-5">
+              Vagas Limitadas na Semana
+            </span>
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl tracking-tight leading-tight mb-5">
+              Agende sua <span class="text-antero-teal">1ª Consultoria Grátis</span> agora mesmo
+            </h2>
+            <p class="text-slate-300 text-base sm:text-lg leading-relaxed mb-8">
+              Em 30 minutos de conversa objetiva (online via Google Meet ou WhatsApp), analisamos a situação da sua marca e traçamos um plano claro de proteção e crescimento.
+            </p>
+
+            <ul class="space-y-4 text-sm sm:text-base text-slate-300">
+              <li class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-antero-teal/20 flex items-center justify-center shrink-0 mt-0.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-cyan-300"></i>
+                </div>
+                <span>Pré-análise gratuita de disponibilidade no INPI.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-antero-teal/20 flex items-center justify-center shrink-0 mt-0.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-cyan-300"></i>
+                </div>
+                <span>Orientação sobre expansão comercial e internacionalização.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full bg-antero-teal/20 flex items-center justify-center shrink-0 mt-0.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5 text-cyan-300"></i>
+                </div>
+                <span>Confirmação e lembretes enviados diretamente no seu WhatsApp e E-mail.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="lg:col-span-7 reveal">
+            <div class="bg-white rounded-2xl p-6 sm:p-10 shadow-2xl border border-slate-200">
+              <div class="mb-6">
+                <h3 class="font-display font-bold text-2xl text-antero-dark">Reserve seu horário</h3>
+                <p class="text-sm text-antero-muted mt-1">Preencha seus dados abaixo para confirmar sua sessão gratuita.</p>
+              </div>
+
+              <form id="booking-form" class="space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="client-name" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Nome Completo *</label>
+                    <input type="text" id="client-name" required placeholder="Ex: João Silva" class="form-input" />
+                  </div>
+                  <div>
+                    <label for="client-company" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Empresa / Marca *</label>
+                    <input type="text" id="client-company" required placeholder="Ex: Silva Alimentos Ltda" class="form-input" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="client-whatsapp" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">WhatsApp (com DDD) *</label>
+                    <input type="tel" id="client-whatsapp" required placeholder="(85) 99999-9999" maxlength="15" class="form-input" />
+                  </div>
+                  <div>
+                    <label for="client-email" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">E-mail *</label>
+                    <input type="email" id="client-email" required placeholder="joao@suaempresa.com.br" class="form-input" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label for="client-service" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Objetivo Principal *</label>
+                    <select id="client-service" required class="form-input bg-white">
+                      <option value="Registro de Marca (INPI)">Registro de Marca (INPI)</option>
+                      <option value="Internacionalização (Brasil–Paraguai)">Internacionalização (BR–PY)</option>
+                      <option value="Preservação de Provas Digitais">Provas Digitais</option>
+                      <option value="Aceleração & Mediação">Aceleração / Mediação</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="client-date" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Data Desejada *</label>
+                    <input type="date" id="client-date" required class="form-input" />
+                  </div>
+                  <div>
+                    <label for="client-time" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Horário *</label>
+                    <select id="client-time" required class="form-input bg-white">
+                      <option value="09:00">09:00</option>
+                      <option value="10:30">10:30</option>
+                      <option value="14:00">14:00</option>
+                      <option value="15:30">15:30</option>
+                      <option value="17:00">17:00</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="client-notes" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Conte brevemente sobre sua marca (Opcional)</label>
+                  <textarea id="client-notes" rows="2" placeholder="Ex: Quero registrar minha marca no segmento de vestuário e avaliar expansão..." class="form-input resize-none"></textarea>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-5 pt-1">
+                  <label class="inline-flex items-center gap-2 text-xs font-medium text-slate-600 cursor-pointer">
+                    <input type="checkbox" id="notify-whatsapp" checked class="w-4 h-4 rounded text-antero-teal focus:ring-antero-teal border-slate-300" />
+                    <span>Receber confirmação e lembrete via WhatsApp</span>
+                  </label>
+                  <label class="inline-flex items-center gap-2 text-xs font-medium text-slate-600 cursor-pointer">
+                    <input type="checkbox" id="notify-email" checked class="w-4 h-4 rounded text-antero-teal focus:ring-antero-teal border-slate-300" />
+                    <span>Receber confirmação por E-mail</span>
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  id="submit-btn"
+                  class="w-full inline-flex justify-center items-center gap-2.5 bg-antero-teal hover:bg-antero-tealDark text-white font-bold text-base px-6 py-4 rounded-xl transition-all shadow-teal hover:-translate-y-0.5"
+                >
+                  <i data-lucide="check-circle" class="w-5 h-5"></i>
+                  <span>Confirmar 1ª Consultoria Grátis</span>
+                </button>
+              </form>
+
+              <div id="booking-success" class="hidden text-center py-6 space-y-5">
+                <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                  <i data-lucide="check-circle-2" class="w-9 h-9"></i>
+                </div>
+                <div>
+                  <h4 class="font-display font-extrabold text-2xl text-antero-dark">Agendamento Registrado!</h4>
+                  <p id="success-summary" class="text-sm text-slate-600 mt-2 max-w-md mx-auto"></p>
+                </div>
+                <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2">
+                  <a
+                    id="success-wa-link"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex justify-center items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-5 py-3 rounded-xl transition-colors"
+                  >
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    <span>Confirmar Agora no WhatsApp</span>
+                  </a>
+                  <button
+                    type="button"
+                    onclick="resetBookingForm()"
+                    class="inline-flex justify-center items-center gap-2 border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold text-sm px-5 py-3 rounded-xl transition-colors"
+                  >
+                    <span>Fazer Novo Agendamento</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. DEPOIMENTOS -->
+    <section id="resultados" class="py-20 lg:py-28 bg-antero-surface">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6 reveal">
+          <div class="max-w-2xl">
+            <span class="text-antero-teal font-bold text-xs uppercase tracking-[0.2em]">Histórias Reais</span>
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-antero-dark mt-2 tracking-tight">
+              Empresas que protegeram e aceleraram suas marcas
+            </h2>
+          </div>
+          <a
+            href="https://www.instagram.com/anteroconsultoria/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-sm font-semibold text-antero-dark hover:text-antero-teal transition-colors"
+          >
+            <i data-lucide="instagram" class="w-4 h-4 text-antero-teal"></i>
+            <span>@anteroconsultoria</span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <article class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-soft flex flex-col justify-between reveal">
+            <div>
+              <div class="flex gap-1 text-antero-teal mb-4" aria-label="5 de 5 estrelas">
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              </div>
+              <p class="text-slate-700 text-sm sm:text-base leading-relaxed italic">
+                "Na primeira consultoria gratuita já descobrimos uma marca colidente no INPI que poderia nos custar todo o investimento em fachada e embalagens. A Antero salvou nosso lançamento."
+              </p>
+            </div>
+            <div class="mt-6 pt-5 border-t border-slate-100">
+              <p class="font-display font-bold text-sm text-antero-dark">Marcelo Rodrigues</p>
+              <p class="text-xs text-antero-muted">Sócio-Fundador • Rede de Alimentação</p>
+            </div>
+          </article>
+
+          <article class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-soft flex flex-col justify-between reveal">
+            <div>
+              <div class="flex gap-1 text-antero-teal mb-4" aria-label="5 de 5 estrelas">
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              </div>
+              <p class="text-slate-700 text-sm sm:text-base leading-relaxed italic">
+                "Tivemos um suporte impecável para estruturar nossa operação internacional e proteger nossa propriedade intelectual no Mercosul. Linguagem direta e zero enrolação."
+              </p>
+            </div>
+            <div class="mt-6 pt-5 border-t border-slate-100">
+              <p class="font-display font-bold text-sm text-antero-dark">Patrícia Vasconcelos</p>
+              <p class="text-xs text-antero-muted">Diretora Comercial • Indústria Têxtil</p>
+            </div>
+          </article>
+
+          <article class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-soft flex flex-col justify-between reveal">
+            <div>
+              <div class="flex gap-1 text-antero-teal mb-4" aria-label="5 de 5 estrelas">
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              </div>
+              <p class="text-slate-700 text-sm sm:text-base leading-relaxed italic">
+                "A coleta técnica das provas digitais contra um concorrente que plagiava nossos anúncios foi decisiva para resolvermos o caso em poucos dias de forma extrajudicial."
+              </p>
+            </div>
+            <div class="mt-6 pt-5 border-t border-slate-100">
+              <p class="font-display font-bold text-sm text-antero-dark">Henrique Alencar</p>
+              <p class="text-xs text-antero-muted">CEO • E-commerce &amp; Distribuição</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FAQ -->
+    <section id="faq" class="py-20 lg:py-28 bg-white border-t border-slate-200/80">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14 reveal">
+          <span class="text-antero-teal font-bold text-xs uppercase tracking-[0.2em]">Perguntas Frequentes</span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-antero-dark mt-2 tracking-tight">
+            Dúvidas comuns antes de agendar
+          </h2>
+        </div>
+
+        <div class="space-y-4 reveal">
+          <div class="faq-item border border-slate-200 rounded-xl bg-antero-surface overflow-hidden" data-open="true">
+            <button type="button" class="faq-trigger w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-antero-teal" aria-expanded="true">
+              <span class="font-display font-bold text-base sm:text-lg text-antero-dark">A 1ª consultoria é realmente gratuita e sem compromisso?</span>
+              <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-antero-teal shrink-0 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content">
+              <div class="overflow-hidden">
+                <p class="px-5 sm:px-6 pb-6 text-sm sm:text-base text-slate-600 leading-relaxed">
+                  Sim, 100% gratuita. Nosso objetivo nessa primeira conversa é entender seu negócio, verificar riscos imediatos de registro ou expansão e apresentar caminhos claros — você decide livremente se deseja avançar conosco.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item border border-slate-200 rounded-xl bg-antero-surface overflow-hidden" data-open="false">
+            <button type="button" class="faq-trigger w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-antero-teal" aria-expanded="false">
+              <span class="font-display font-bold text-base sm:text-lg text-antero-dark">Já tenho CNPJ e perfil no Instagram. Preciso registrar no INPI?</span>
+              <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-antero-teal shrink-0 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content">
+              <div class="overflow-hidden">
+                <p class="px-5 sm:px-6 pb-6 text-sm sm:text-base text-slate-600 leading-relaxed">
+                  Sim. O CNPJ protege apenas a razão social no seu estado, e redes sociais não conferem propriedade legal. Somente o registro no INPI garante exclusividade nacional e o direito de impedir cópias.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item border border-slate-200 rounded-xl bg-antero-surface overflow-hidden" data-open="false">
+            <button type="button" class="faq-trigger w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-antero-teal" aria-expanded="false">
+              <span class="font-display font-bold text-base sm:text-lg text-antero-dark">Como funciona a consultoria de internacionalização de marcas?</span>
+              <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-antero-teal shrink-0 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content">
+              <div class="overflow-hidden">
+                <p class="px-5 sm:px-6 pb-6 text-sm sm:text-base text-slate-600 leading-relaxed">
+                  Mapeamos o potencial da sua empresa para atuar fora do Brasil (com forte expertise no eixo Brasil–Paraguai), orientando sobre registro internacional, incentivos produtivos e conexões estratégicas B2B.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item border border-slate-200 rounded-xl bg-antero-surface overflow-hidden" data-open="false">
+            <button type="button" class="faq-trigger w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-antero-teal" aria-expanded="false">
+              <span class="font-display font-bold text-base sm:text-lg text-antero-dark">Como recebo a confirmação e os lembretes da minha consultoria?</span>
+              <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-antero-teal shrink-0 transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content">
+              <div class="overflow-hidden">
+                <p class="px-5 sm:px-6 pb-6 text-sm sm:text-base text-slate-600 leading-relaxed">
+                  Assim que você preenche o formulário de agendamento, seus dados entram na nossa agenda e nossa equipe envia a confirmação e os lembretes diretamente pelo WhatsApp e pelo e-mail cadastrados.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CTA FINAL -->
+    <section class="py-16 bg-antero-teal text-white">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+        <div>
+          <h2 class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight">Sua marca vale muito para ficar desprotegida.</h2>
+          <p class="text-cyan-50 mt-2 text-base">Garanta sua 1ª consultoria gratuita ou fale agora mesmo com nossa equipe no WhatsApp.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+          <a href="#agendar" class="inline-flex justify-center items-center gap-2 bg-antero-dark hover:bg-slate-900 text-white font-bold text-sm sm:text-base px-6 py-4 rounded-xl transition-all shadow-lg hover:-translate-y-0.5">
+            <span>Agendar Consultoria</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+          <a
+            href="https://wa.me/558592550496?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20minha%201%C2%AA%20consultoria%20gratuita%20com%20a%20Antero%20Consultoria."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex justify-center items-center gap-2 bg-white hover:bg-slate-100 text-antero-dark font-bold text-sm sm:text-base px-6 py-4 rounded-xl transition-all shadow-lg hover:-translate-y-0.5"
+          >
+            <i data-lucide="message-circle" class="w-4 h-4 text-emerald-600"></i>
+            <span>(85) 9255-0496</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- VISÃO 2: ABA DE ACOMPANHAMENTO DE CLIENTES (CRM) -->
+  <section id="view-crm" class="hidden min-h-screen pt-28 pb-20 bg-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-antero-teal mb-1">
+            <i data-lucide="database" class="w-4 h-4"></i>
+            <span>Banco de Dados &amp; Gestão de Agendamentos</span>
+          </div>
+          <h1 class="font-display font-extrabold text-2xl sm:text-3xl text-antero-dark">
+            Painel de Acompanhamento de Clientes
+          </h1>
+          <p class="text-sm text-slate-600 mt-1">
+            Gerencie leads da 1ª consultoria grátis, envie confirmações e lembretes por WhatsApp ou E-mail e exporte sua base.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <input type="file" id="logo-uploader" accept="image/*" class="hidden" onchange="uploadCustomLogo(event)" />
+          <button
+            type="button"
+            onclick="document.getElementById('logo-uploader').click()"
+            class="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-semibold text-sm px-4 py-2.5 rounded-xl transition-colors shadow-sm"
+            title="Selecione o arquivo .jfif ou .png da sua logo para exibir no site"
+          >
+            <i data-lucide="image-plus" class="w-4 h-4 text-antero-teal"></i>
+            <span>Carregar Logo Oficial</span>
+          </button>
+
+          <button
+            type="button"
+            onclick="exportToCSV()"
+            class="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-semibold text-sm px-4 py-2.5 rounded-xl transition-colors shadow-sm"
+          >
+            <i data-lucide="download" class="w-4 h-4 text-antero-teal"></i>
+            <span>Exportar Base (CSV)</span>
+          </button>
+
+          <button
+            type="button"
+            onclick="switchView('site')"
+            class="inline-flex items-center gap-2 bg-antero-dark hover:bg-slate-800 text-white font-semibold text-sm px-4 py-2.5 rounded-xl transition-colors shadow-sm"
+          >
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span>Voltar ao Site</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Total na Base</p>
+          <p id="stat-total" class="font-display font-extrabold text-3xl text-antero-dark mt-1">0</p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold uppercase tracking-wider text-amber-600">Agendados</p>
+          <p id="stat-agendado" class="font-display font-extrabold text-3xl text-amber-600 mt-1">0</p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold uppercase tracking-wider text-antero-teal">Confirmados</p>
+          <p id="stat-confirmado" class="font-display font-extrabold text-3xl text-antero-teal mt-1">0</p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <p class="text-xs font-semibold uppercase tracking-wider text-emerald-600">Concluídos</p>
+          <p id="stat-concluido" class="font-display font-extrabold text-3xl text-emerald-600 mt-1">0</p>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm mb-6 flex flex-col sm:flex-row gap-4 justify-between items-center">
+        <div class="relative w-full sm:max-w-md">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input
+            type="text"
+            id="crm-search"
+            oninput="renderCRM()"
+            placeholder="Buscar por nome, empresa, WhatsApp ou e-mail..."
+            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:border-antero-teal focus:ring-2 focus:ring-antero-teal/20 outline-none text-sm"
+          />
+        </div>
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+          <select id="crm-filter-status" onchange="renderCRM()" class="w-full sm:w-auto px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white focus:border-antero-teal outline-none">
+            <option value="TODOS">Todos os Status</option>
+            <option value="Agendado">Agendado</option>
+            <option value="Confirmado">Confirmado</option>
+            <option value="Concluído">Concluído</option>
+            <option value="Cancelado">Cancelado</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase tracking-wider text-slate-500">
+                <th class="py-4 px-5">Cliente / Marca</th>
+                <th class="py-4 px-5">Contato</th>
+                <th class="py-4 px-5">Consultoria &amp; Data</th>
+                <th class="py-4 px-5">Status</th>
+                <th class="py-4 px-5 text-right">Confirmação &amp; Lembretes</th>
+              </tr>
+            </thead>
+            <tbody id="crm-table-body" class="divide-y divide-slate-200 text-sm"></tbody>
+          </table>
+        </div>
+
+        <div id="crm-empty-state" class="hidden py-16 px-6 text-center">
+          <div class="w-14 h-14 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="calendar-x" class="w-7 h-7"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-antero-dark">Nenhum agendamento encontrado</h3>
+          <p class="text-sm text-slate-500 mt-1 max-w-md mx-auto">
+            Os clientes que agendarem a 1ª consultoria gratuita no site aparecerão automaticamente aqui.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER INSTITUCIONAL -->
+  <footer class="bg-antero-dark text-slate-400 border-t border-white/10 py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-white/10">
+        <div class="md:col-span-2">
+          <div class="inline-block bg-white rounded-xl px-3.5 py-2 mb-4">
+            <img
+              id="brand-logo-footer"
+              src="Logo - Antero Consultoria de Aceleração e Internacionalização de Marcas.jfif"
+              alt="Antero Consultoria"
+              class="h-10 w-auto object-contain"
+              onerror="handleLogoError(this, 'logo-fallback-footer')"
+            />
+            <span id="logo-fallback-footer" class="hidden font-display font-extrabold text-antero-dark">Antero® Consultoria</span>
+          </div>
+          <p class="text-sm text-slate-400 max-w-sm leading-relaxed">
+            Consultoria de Aceleração e Internacionalização de Marcas. Registro no INPI, expansão Brasil–Mercosul, preservação de provas digitais e mediação empresarial.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider mb-4">Navegação</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="#solucoes" onclick="switchView('site')" class="hover:text-antero-teal transition-colors">Soluções</a></li>
+            <li><a href="#metodo" onclick="switchView('site')" class="hover:text-antero-teal transition-colors">Como Funciona</a></li>
+            <li><a href="#agendar" onclick="switchView('site')" class="hover:text-antero-teal transition-colors">1ª Consultoria Grátis</a></li>
+            <li><button type="button" onclick="switchView('crm')" class="hover:text-antero-teal transition-colors">Aba de Agendamentos (CRM)</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider mb-4">Contato &amp; Endereço</h4>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-antero-teal shrink-0 mt-0.5"></i>
+              <span>Rua Antº Correia Viana, Luzardo Viana, Maracanaú/CE.</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+              <a
+                href="https://wa.me/558592550496?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Antero%20Consultoria."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-emerald-400 transition-colors font-medium text-slate-200"
+              >(85) 9255-0496</a>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="instagram" class="w-4 h-4 text-antero-teal shrink-0"></i>
+              <a
+                href="https://www.instagram.com/anteroconsultoria/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-antero-teal transition-colors"
+              >@anteroconsultoria</a>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="mail" class="w-4 h-4 text-antero-teal shrink-0"></i>
+              <a href="mailto:contato@anteroconsultoria.com.br" class="hover:text-antero-teal transition-colors">contato@anteroconsultoria.com.br</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+        <p>&copy; <span id="current-year"></span> Antero® Consultoria de Aceleração e Internacionalização de Marcas. Todos os direitos reservados.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-slate-300 transition-colors">Política de Privacidade (LGPD)</a>
+          <a href="#" class="hover:text-slate-300 transition-colors">Termos de Uso</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOTÃO FLUTUANTE DE WHATSAPP -->
+  <a
+    href="https://wa.me/558592550496?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Antero%20Consultoria%20sobre%20a%201%C2%AA%20consultoria%20gratuita."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Falar no WhatsApp da Antero Consultoria (85) 9255-0496"
+    class="fixed bottom-5 right-5 z-50 group flex items-center gap-2.5 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-3.5 rounded-full shadow-2xl transition-all hover:scale-105 focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-400"
+  >
+    <i data-lucide="message-circle" class="w-6 h-6 shrink-0"></i>
+    <span class="hidden sm:inline font-semibold text-sm pr-1">WhatsApp</span>
+  </a>
+
+  <!-- Container de Notificações (Toast) -->
+  <div id="toast-container" class="fixed bottom-20 right-5 z-50 space-y-2"></div>
+
+  <!-- JavaScript ES6+ -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+/* ==========================================================================
+   ANTERO® CONSULTORIA — ESTILOS CUSTOMIZADOS E MICRO-INTERAÇÕES
+   ========================================================================== */
+
+:root {
+  --antero-teal: #0d8ca3;
+  --antero-teal-dark: #096e81;
+  --antero-dark: #0a0f14;
+  --antero-surface: #f8fafc;
+}
+
+.hero-glow-top {
+  position: absolute;
+  top: -7rem;
+  right: -6rem;
+  width: 520px;
+  height: 520px;
+  border-radius: 9999px;
+  background: rgba(13, 140, 163, 0.2);
+  filter: blur(64px);
+}
+
+.hero-glow-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 380px;
+  height: 380px;
+  border-radius: 9999px;
+  background: rgba(13, 140, 163, 0.1);
+  filter: blur(64px);
+}
+
+.glass-card {
+  background: rgba(10, 15, 20, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #cbd5e1;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus {
+  border-color: var(--antero-teal);
+  box-shadow: 0 0 0 3px rgba(13, 140, 163, 0.18);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faq-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-out;
+}
+
+.faq-item[data-open="true"] .faq-content {
+  grid-template-rows: 1fr;
+}
+
+.faq-item[data-open="true"] .faq-icon {
+  transform: rotate(180deg);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast-enter {
+  animation: slideUp 0.25s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
